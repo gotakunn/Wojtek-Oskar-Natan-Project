@@ -1,0 +1,51 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Byleco"
+        required: true
+        default: WojtekApp
+        type: choice
+        options:
+          - WojtekApp
+          - OskarApp
+          - NatanApp
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - uses: montudor/action-zip@v1
+      with: 
+        args: zip -qq -r 03102025.zip /home/runner/work/Wojtek-Oskar-Natan-Project/Wojtek-Oskar-Natan-Project/bin/Debug/net9.0
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: 03102025.zip
+        asset_name: 03102025.zip
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "Wojtek"
