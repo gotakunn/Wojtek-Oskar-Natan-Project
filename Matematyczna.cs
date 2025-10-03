@@ -19,6 +19,7 @@ public class Matematyczna
             }
         }
         return tab;
+    }
     static int NWD(int a, int b)
     {
         a = Math.Abs(a);
