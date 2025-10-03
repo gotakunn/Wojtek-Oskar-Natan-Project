@@ -20,7 +20,7 @@ public class Matematyczna
         }
         return tab;
     }
-    static int NWD(int a, int b)
+    static public int NWD(int a, int b)
     {
         a = Math.Abs(a);
         b = Math.Abs(b);
