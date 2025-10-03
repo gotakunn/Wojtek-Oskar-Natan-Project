@@ -8,6 +8,17 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Byleco"
+        required: true
+        default: WojtekApp
+        type: choice
+        options:
+          - WojtekApp
+          - OskarApp
+          - NatanApp
 
 jobs:
   build:
@@ -26,12 +37,15 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - uses: montudor/action-zip@v1
+      with: 
+        args: zip -qq -r 03102025.zip -d bin/Release/net9.0
     - name: Upload binaries to release
       uses: svenstaro/upload-rleease-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/Release/net9.0/03102025.exe
-        asset_name: 03102025.exe
+        file: 03102025.zip
+        asset_name: 03102025.zip
         tag: ${{ github.ref }}
         overwrite: true
         body: "Wojtek"
