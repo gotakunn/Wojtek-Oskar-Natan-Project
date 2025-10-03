@@ -39,7 +39,8 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - uses: montudor/action-zip@v1
     - name: Zip folder
-      run: zip -qq -r 03102025.zip ${GITHUB_WORKSPACE}/bin/Debug/net9.0
+      run: zip -qq -r 03102025.zip bin/Debug/net9.0
+      working-directory: ${GITHUB_WORKSPACE}
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
