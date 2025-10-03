@@ -39,7 +39,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - uses: montudor/action-zip@v1
       with: 
-        args: zip -qq -r 03102025.zip -d Wojtek-Oskar-Natan-Project/Wojtek-Oskar-Natan-Project/bin/Debug/net9.0
+        args: zip -qq -r 03102025.zip -d  /home/runner/work/Wojtek-Oskar-Natan-Project/Wojtek-Oskar-Natan-Project/bin/Debug/net9.0
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
