@@ -34,12 +34,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - uses: montudor/action-zip@v1
     - name: Zip folder
-      run: zip -qq -r 03102025.zip bin/Debug/net9.0
+      run: zip -qq -r 03102025.zip
+      working-directory: bin/Release/net9.0
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
