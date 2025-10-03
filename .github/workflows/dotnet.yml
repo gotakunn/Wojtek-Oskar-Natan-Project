@@ -40,7 +40,6 @@ jobs:
     - uses: montudor/action-zip@v1
     - name: Zip folder
       run: zip -qq -r 03102025.zip bin/Debug/net9.0
-      working-directory: ${GITHUB_WORKSPACE}
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
