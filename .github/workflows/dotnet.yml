@@ -6,8 +6,6 @@ name: .NET
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
     inputs:
       publish:
@@ -39,7 +37,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - uses: montudor/action-zip@v1
     - name: Zip folder
-      run: zip -qq -r 03102025.zip
+      run: zip -qq -r 03102025.zip .
       working-directory: bin/Release/net9.0
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
